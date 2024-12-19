@@ -1,0 +1,79 @@
+[33mcommit 95aef3138386d7a81e6c0ecb6cfa8425474b8f0e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 20:05:27 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 20:05:27 2024 +0700
+
+    แก้ไขหน้ารายรับจ่าย
+
+[33mcommit 694d3cf8e18b0af9c5ddd574606022abc97ed7c5[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 20:04:30 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 20:04:30 2024 +0700
+
+    โชว์ผลรวมรายรับจ่าย
+
+[33mcommit 1b9422553d5261183a989408d2ba3ff74072f2ba[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:54:27 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:54:27 2024 +0700
+
+    เพิ่มในส่วนการกรองของค่าทั้งหมด
+
+[33mcommit 5a3df249addbd75f025dbde578b40e3f4ebe8d51[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:53:48 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:53:48 2024 +0700
+
+    เพิ่มในส่วนการกรอง รายรับรายจ่าย
+
+[33mcommit d23b3fee98887e32bf8ba371eeb36589a8cf79d5[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:34:21 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:34:21 2024 +0700
+
+    modified ส่วนหน้าถัดไปในรายรับรายจ่าย
+
+[33mcommit c09b892d6185482f7e4e4119c1e933321468ea81[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:33:00 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:33:00 2024 +0700
+
+    เพิ่มอิโมจิหน้า Login
+
+[33mcommit 48ee8882446097860b64ff846cf053816501cb87[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:31:34 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:31:34 2024 +0700
+
+    modified transaction
+
+[33mcommit 87e4763728d8ff9385c3b16c5e942685c6a9f477[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:29:56 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:29:56 2024 +0700
+
+    เพิ่มส่วนของ logout
+
+[33mcommit 2c2dc12fe1d8e2eb15a997cf450d20efa35b800a[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 19:27:22 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 19:27:22 2024 +0700
+
+    แก้ไขหน้า login
+
+[33mcommit 36db5f6af1ccd8178a57395a74e0d2086d9d38d8[m
+Author:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+AuthorDate: Sat Dec 21 18:34:18 2024 +0700
+Commit:     Sroyfa Tongchuay <6710110429@psu.ac.th>
+CommitDate: Sat Dec 21 18:34:18 2024 +0700
+
+    first commit

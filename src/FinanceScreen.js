@@ -11,7 +11,9 @@ function FinanceScreen(props) {
   const [transactionData, setTransactionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filterType, setFilterType] = useState('all'); // 'all', 'income', 'expense'
-  const [summaryAmount, setSummaryAmount] = useState(0); // สำหรับคำนวณยอดรวม
+  const [incomeAmount, setIncomeAmount] = useState(0); // ยอดรายรับ
+  const [expenseAmount, setExpenseAmount] = useState(0); // ยอดรายจ่าย
+  const [totalAmount, setTotalAmount] = useState(0); // ยอดรวมทั้งหมด (รายรับ - รายจ่าย)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState(null);
 
@@ -91,16 +93,18 @@ function FinanceScreen(props) {
     props.onLogout();
   };
 
-  // Calculate summary amount
+  // Calculate income, expense, and total amount based on filter
   useEffect(() => {
-    setSummaryAmount(
-      transactionData.reduce(
-        (sum, transaction) =>
-          transaction.type === 'income' ? sum + transaction.amount : sum - transaction.amount,
-        0
-      )
+    const income = filteredTransactions.reduce((sum, transaction) =>
+      transaction.type === 'income' ? sum + transaction.amount : sum, 0
     );
-  }, [transactionData]);
+    const expense = filteredTransactions.reduce((sum, transaction) =>
+      transaction.type === 'expense' ? sum + transaction.amount : sum, 0
+    );
+    setIncomeAmount(income);
+    setExpenseAmount(expense);
+    setTotalAmount(income - expense); // รายรับ - รายจ่าย
+  }, [filteredTransactions]);
 
   // Fetch initial items
   useEffect(() => {
@@ -112,7 +116,7 @@ function FinanceScreen(props) {
       <header className="App-header" style={{ flex: 1 }}>
         <Spin spinning={isLoading}>
           <Typography.Title>
-            จำนวนเงินปัจจุบัน {summaryAmount} บาท
+            {filterType === 'all' ? 'การจัดการธุรกรรม' : filterType === 'income' ? 'รายรับ' : 'รายจ่าย'}
           </Typography.Title>
 
           {/* Filter buttons */}
@@ -120,6 +124,19 @@ function FinanceScreen(props) {
             <Button onClick={() => setFilterType('all')} style={{ marginRight: '10px' }}>ทั้งหมด</Button>
             <Button onClick={() => setFilterType('income')} style={{ marginRight: '10px' }}>รายรับ</Button>
             <Button onClick={() => setFilterType('expense')}>รายจ่าย</Button>
+          </div>
+
+          {/* Display total amount */}
+          {filterType === 'all' && (
+            <div style={{ marginBottom: '20px' }}>
+              <Typography.Text>ยอดรวมทั้งหมด: {totalAmount} บาท</Typography.Text>
+            </div>
+          )}
+
+          {/* Display income and expense based on filter */}
+          <div style={{ marginBottom: '20px' }}>
+            {filterType === 'income' && <Typography.Text>รายรับ: {incomeAmount} บาท</Typography.Text>}
+            {filterType === 'expense' && <Typography.Text>รายจ่าย: {expenseAmount} บาท</Typography.Text>}
           </div>
 
           <AddItem onItemAdded={handleAddItem} />
@@ -189,6 +206,13 @@ function FinanceScreen(props) {
 }
 
 export default FinanceScreen;
+
+
+
+
+
+
+
 
 
 

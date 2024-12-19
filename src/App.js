@@ -83,6 +83,7 @@ function App() {
           </div>
         )}
 
+
         {/* Show LoginScreen or FinanceScreen based on authentication status */}
         {!isAuthenticated && <LoginScreen onLoginSuccess={handleLoginSuccess} />}
         
@@ -102,6 +103,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
