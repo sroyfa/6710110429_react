@@ -83,6 +83,9 @@ function App() {
           </div>
         )}
 
+
+        
+
         {/* แสดง LoginScreen หรือ FinanceScreen ตามสถานะการล็อกอิน */}
         {!isAuthenticated && <LoginScreen onLoginSuccess={handleLoginSuccess} />}
         {isAuthenticated && (
