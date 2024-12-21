@@ -149,6 +149,8 @@ function FinanceScreen(props) {
         </Button>
       </footer>
 
+
+
       {/* Modal for Editing Transaction */}
       <Modal
         title="Edit Transaction"
