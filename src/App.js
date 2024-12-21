@@ -3,8 +3,8 @@ import "./App.css";
 import axios from "axios";
 import LoginScreen from "./LoginScreen";
 import FinanceScreen from "./FinanceScreen";
-import TransactionList from "./components/TransactionList";
 
+// Axios default base URL
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337";
 
 function App() {
@@ -35,16 +35,6 @@ function App() {
     }
   }, []);
 
-  // Callback functions for TransactionList
-  const handleDeleteTransaction = (id) => {
-    setTransactions((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const handleEditTransaction = (record) => {
-    console.log("Editing transaction:", record);
-    // Add logic for editing the transaction (e.g., opening a modal)
-  };
-
   // Callback for successful login
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token", token); // Store token in localStorage
@@ -59,10 +49,20 @@ function App() {
     setIsAuthenticated(false);
   };
 
+  // Callback functions for TransactionList
+  const handleDeleteTransaction = (id) => {
+    setTransactions((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleEditTransaction = (record) => {
+    console.log("Editing transaction:", record);
+    // Add logic for editing the transaction (e.g., opening a modal)
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        {/* เพิ่มข้อความ Welcome พร้อมกรอบและอีโมจิ */}
+        {/* Welcome Message */}
         {!isAuthenticated && (
           <div className="welcome-box">
             <h1>
@@ -83,16 +83,18 @@ function App() {
           </div>
         )}
 
-
-        
-
-        {/* แสดง LoginScreen หรือ FinanceScreen ตามสถานะการล็อกอิน */}
+        {/* Show LoginScreen or FinanceScreen based on authentication status */}
         {!isAuthenticated && <LoginScreen onLoginSuccess={handleLoginSuccess} />}
+        
         {isAuthenticated && (
-          <FinanceScreen
-            onLogout={handleLogout} // ส่งฟังก์ชัน handleLogout ไปที่ FinanceScreen
-            transactions={transactions} // ส่งข้อมูลธุรกรรมไปที่ FinanceScreen
-          />
+          <div>
+            <FinanceScreen
+              onLogout={handleLogout}
+              transactions={transactions}
+              onDeleteTransaction={handleDeleteTransaction}
+              onEditTransaction={handleEditTransaction}
+            />
+          </div>
         )}
       </header>
     </div>

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Typography, Divider, Spin, Modal, Form, Input } from 'antd';
 import TransactionList from "./components/TransactionList";
 import AddItem from './components/AddItem';
-import { Modal, Form, Input, Spin, Typography, Divider, Button } from 'antd';
-import dayjs from 'dayjs';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 const URL_TXACTIONS = '/api/txactions';
 
 function FinanceScreen(props) {
-  const [summaryAmount, setSummaryAmount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [transactionData, setTransactionData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filterType, setFilterType] = useState('all'); // 'all', 'income', 'expense'
+  const [summaryAmount, setSummaryAmount] = useState(0); // สำหรับคำนวณยอดรวม
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentTransaction, setCurrentTransaction] = useState(null);
 
@@ -33,6 +34,12 @@ function FinanceScreen(props) {
     }
   };
 
+  // Filter transactions based on selected type
+  const filteredTransactions = transactionData.filter(transaction => {
+    if (filterType === 'all') return true;
+    return transaction.type === filterType;
+  });
+
   // Add new transaction
   const handleAddItem = async (item) => {
     try {
@@ -53,8 +60,8 @@ function FinanceScreen(props) {
 
   // Edit transaction (open modal)
   const handleEditTransaction = (record) => {
-    setCurrentTransaction(record); // Set current transaction for editing
-    setIsEditModalOpen(true); // Open modal
+    setCurrentTransaction(record);
+    setIsEditModalOpen(true);
   };
 
   // Save edited transaction
@@ -71,7 +78,7 @@ function FinanceScreen(props) {
           transaction.id === id ? { id, key: id, ...attributes } : transaction
         )
       );
-      setIsEditModalOpen(false); // Close modal
+      setIsEditModalOpen(false);
     } catch (err) {
       console.log(err);
     } finally {
@@ -79,17 +86,9 @@ function FinanceScreen(props) {
     }
   };
 
-  // Delete transaction
-  const handleRowDeleted = async (id) => {
-    try {
-      setIsLoading(true);
-      await axios.delete(`${URL_TXACTIONS}/${id}`);
-      fetchItems();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+  // Handle logout
+  const handleLogout = () => {
+    props.onLogout();
   };
 
   // Calculate summary amount
@@ -97,7 +96,7 @@ function FinanceScreen(props) {
     setSummaryAmount(
       transactionData.reduce(
         (sum, transaction) =>
-          transaction.type === "income" ? sum + transaction.amount : sum - transaction.amount,
+          transaction.type === 'income' ? sum + transaction.amount : sum - transaction.amount,
         0
       )
     );
@@ -108,11 +107,6 @@ function FinanceScreen(props) {
     fetchItems();
   }, []);
 
-  const handleLogout = () => {
-    // เรียกฟังก์ชัน logout ที่ส่งจาก App.js
-    props.onLogout();
-  };
-
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <header className="App-header" style={{ flex: 1 }}>
@@ -121,35 +115,40 @@ function FinanceScreen(props) {
             จำนวนเงินปัจจุบัน {summaryAmount} บาท
           </Typography.Title>
 
+          {/* Filter buttons */}
+          <div style={{ marginBottom: '20px' }}>
+            <Button onClick={() => setFilterType('all')} style={{ marginRight: '10px' }}>ทั้งหมด</Button>
+            <Button onClick={() => setFilterType('income')} style={{ marginRight: '10px' }}>รายรับ</Button>
+            <Button onClick={() => setFilterType('expense')}>รายจ่าย</Button>
+          </div>
+
           <AddItem onItemAdded={handleAddItem} />
-          <Divider>บันทึก รายรับ - รายจ่าย</Divider>
+          <Divider>รายการธุรกรรม</Divider>
+
           <TransactionList
-            data={transactionData}
+            data={filteredTransactions}
             onRowEdit={handleEditTransaction}
-            onRowDeleted={handleRowDeleted}
           />
         </Spin>
       </header>
 
-      {/* ปุ่ม Logout อยู่ที่ด้านล่างและคงที่ */}
+      {/* Logout button */}
       <footer
         style={{
-          position: 'fixed', // ทำให้ปุ่มอยู่ที่ตำแหน่งคงที่
-          bottom: '20px', // กำหนดให้ปุ่มอยู่ห่างจากด้านล่าง 20px
-          left: '50%', // ให้ปุ่มอยู่ตรงกลาง
-          transform: 'translateX(-50%)', // ให้ปุ่มอยู่กลางแนวนอน
-          width: '90%', // ให้ปุ่มมีความกว้างไม่เกิน 90% ของหน้าจอ
-          maxWidth: '400px', // ตั้งขนาดสูงสุดของปุ่ม
-          padding: '10px', // เพิ่มพื้นที่รอบๆ ปุ่ม
-          zIndex: 10, // ตั้งค่า z-index เพื่อให้ปุ่มอยู่ด้านบนสุด
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '90%',
+          maxWidth: '400px',
+          padding: '10px',
+          zIndex: 10,
         }}
       >
         <Button onClick={handleLogout} type="primary" danger block>
           Logout
         </Button>
       </footer>
-
-
 
       {/* Modal for Editing Transaction */}
       <Modal
@@ -190,6 +189,8 @@ function FinanceScreen(props) {
 }
 
 export default FinanceScreen;
+
+
 
 
 
