@@ -1,0 +1,71 @@
+/* จัดข้อความในแอปทั้งหมดให้อยู่กลาง */
+.App {
+  text-align: center;
+}
+
+/* โลโก้ */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* เมื่อผู้ใช้ไม่ได้เลือกการลดการเคลื่อนไหว */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* ส่วนหัวของแอป */
+.App-header {
+  background-color: #ff98f1; /* สีพื้นหลังเป็นชมพูอ่อน */
+  min-height: 100vh; /* ความสูงเต็มหน้าจอ */
+  display: flex; /* ใช้ Flexbox เพื่อจัดตำแหน่ง */
+  flex-direction: column; /* วางเนื้อหาในแนวตั้ง */
+  align-items: center; /* จัดตำแหน่งแนวนอนให้กลาง */
+  justify-content: center; /* จัดตำแหน่งแนวตั้งให้กลาง */
+  font-size: calc(10px + 2vmin); /* ขนาดฟอนต์ที่ยืดหยุ่น */
+  color: white; /* สีข้อความเป็นสีขาว */
+  padding: 20px; /* เพิ่มระยะห่างจากขอบ */
+  box-sizing: border-box; /* ให้ padding ไม่เกินขนาด */
+}
+
+/* กรอบข้อความ "Welcome to the App" */
+.welcome-box {
+  background-color: white;
+  padding: 10px 20px; /* ลดขนาด padding */
+  border-radius: 10px; /* ลดมุมกรอบให้โค้งมนเล็กน้อย */
+  border: 2px solid #ff6347; /* สีกรอบเป็นสีชมพู */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาเล็กน้อย */
+  text-align: center;
+  font-size: 1.5em; /* ขนาดฟอนต์เล็กลง */
+  color: #ff6347; /* สีข้อความเป็นสีชมพู */
+  margin-bottom: 20px; /* ระยะห่างจากส่วนอื่นๆ */
+}
+
+.welcome-box h1 {
+  margin: 0;
+}
+
+.welcome-box span {
+  font-size: 1.2em; /* ขนาดอีโมจิเล็กลง */
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+/* ลิงก์ในแอป */
+.App-link {
+  color: #61dafb;
+  font-weight: bold; /* ทำให้ลิงก์หนาขึ้น */
+  text-decoration: none; /* เอาเส้นใต้ลิงก์ออก */
+}
+
+/* กำหนดการหมุนของโลโก้ */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
