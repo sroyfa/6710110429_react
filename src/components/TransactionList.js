@@ -69,6 +69,8 @@ export default function TransactionList(props) {
     },
   ];
 
+  
+
   return (
     <Table
       columns={columns}
